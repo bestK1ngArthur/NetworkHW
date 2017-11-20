@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A3B10E61FC3865A006F7A8B /* TableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3B10E51FC3865A006F7A8B /* TableRow.swift */; };
 		6A3E3A631FC2FE6500FD0FCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E3A621FC2FE6500FD0FCA /* AppDelegate.swift */; };
 		6A3E3A651FC2FE6500FD0FCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E3A641FC2FE6500FD0FCA /* ViewController.swift */; };
 		6A3E3A671FC2FE6500FD0FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E3A661FC2FE6500FD0FCA /* Assets.xcassets */; };
 		6A3E3A6A1FC2FE6500FD0FCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A3E3A681FC2FE6500FD0FCA /* Main.storyboard */; };
+		6A3E3A731FC2FF5E00FD0FCA /* CycleCodeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3E3A721FC2FF5E00FD0FCA /* CycleCodeCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A3B10E51FC3865A006F7A8B /* TableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRow.swift; sourceTree = "<group>"; };
 		6A3E3A5F1FC2FE6500FD0FCA /* NetworkHW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkHW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A3E3A621FC2FE6500FD0FCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A3E3A641FC2FE6500FD0FCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -21,6 +24,7 @@
 		6A3E3A691FC2FE6500FD0FCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A3E3A6B1FC2FE6500FD0FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A3E3A6C1FC2FE6500FD0FCA /* NetworkHW.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NetworkHW.entitlements; sourceTree = "<group>"; };
+		6A3E3A721FC2FF5E00FD0FCA /* CycleCodeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleCodeCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +38,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A3B10E71FC386CC006F7A8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6A3B10E51FC3865A006F7A8B /* TableRow.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6A3B10E81FC386D6006F7A8B /* Calculations */ = {
+			isa = PBXGroup;
+			children = (
+				6A3E3A721FC2FF5E00FD0FCA /* CycleCodeCalculator.swift */,
+			);
+			path = Calculations;
+			sourceTree = "<group>";
+		};
 		6A3E3A561FC2FE6500FD0FCA = {
 			isa = PBXGroup;
 			children = (
@@ -53,8 +73,10 @@
 		6A3E3A611FC2FE6500FD0FCA /* NetworkHW */ = {
 			isa = PBXGroup;
 			children = (
-				6A3E3A621FC2FE6500FD0FCA /* AppDelegate.swift */,
+				6A3B10E71FC386CC006F7A8B /* Models */,
+				6A3B10E81FC386D6006F7A8B /* Calculations */,
 				6A3E3A641FC2FE6500FD0FCA /* ViewController.swift */,
+				6A3E3A621FC2FE6500FD0FCA /* AppDelegate.swift */,
 				6A3E3A661FC2FE6500FD0FCA /* Assets.xcassets */,
 				6A3E3A681FC2FE6500FD0FCA /* Main.storyboard */,
 				6A3E3A6B1FC2FE6500FD0FCA /* Info.plist */,
@@ -135,6 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A3E3A651FC2FE6500FD0FCA /* ViewController.swift in Sources */,
+				6A3B10E61FC3865A006F7A8B /* TableRow.swift in Sources */,
+				6A3E3A731FC2FF5E00FD0FCA /* CycleCodeCalculator.swift in Sources */,
 				6A3E3A631FC2FE6500FD0FCA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
