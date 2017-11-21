@@ -78,7 +78,7 @@ class CycleCodeCalculator{
             self.range = 0b0...0b1111111
         } else if (n, k) == (15, 11) {
             self.formingPolynomial = 0b10011
-            self.range = 0b0...0b11111111111111
+            self.range = 0b0...0b111111111111111
         } else {
             self.formingPolynomial = 1
             self.range = 0b0...0b1
@@ -93,7 +93,7 @@ class CycleCodeCalculator{
     func calculateCycleCode(polinomial: Polynomial) -> Polynomial {
         
         let shiftedPolynomial = polinomial << (n-k)
-        let modulo = shiftedPolynomial % formingPolynomial
+        let modulo = binaryXorModulo(dividend: shiftedPolynomial, divider: formingPolynomial)
         
         return shiftedPolynomial + modulo
     }
@@ -103,7 +103,9 @@ class CycleCodeCalculator{
      */
     func getErrorCode(polinomial: Polynomial) -> Polynomial {
         
-        return polinomial % formingPolynomial
+        let error = binaryXorModulo(dividend: polinomial, divider: formingPolynomial)
+
+        return error
     }
     
     /*
@@ -125,8 +127,8 @@ class CycleCodeCalculator{
             var k = 0
             var n = 0
             
-            let valueBits = binaryArrayFromValue(value)
-            let cycleBits = binaryArrayFromValue(self.cycleCode)
+            let valueBits = binaryArrayFromValue(value, needToSupplement: true)
+            let cycleBits = binaryArrayFromValue(self.cycleCode, needToSupplement: true)
             
             while k < valueBits.count {
                 if cycleBits[k] != valueBits[k] {
@@ -140,16 +142,21 @@ class CycleCodeCalculator{
             if n == 0  {
                 continue
             }
-            
-            table[n].combinationsCount += 1
+
+            table[n-1].combinationsCount += 1
             if error != 0 {
                 // ошибка
-                table[n].errorsCount += 1
+                table[n-1].errorsCount += 1
             }
         }
         
         for row in table {
-            row.detectingAbility = Double(row.errorsCount) / Double(row.combinationsCount)
+            
+            if row.combinationsCount == 0, row.errorsCount == 0 {
+                row.detectingAbility = 1
+            } else {
+                row.detectingAbility = Double(row.errorsCount) / Double(row.combinationsCount)
+            }
         }
         
         return table
@@ -160,7 +167,7 @@ class CycleCodeCalculator{
     /*
      Преобразование числа в массив битов
      */
-    func binaryArrayFromValue(_ value: Int) -> [Int] {
+    func binaryArrayFromValue(_ value: Int, needToSupplement: Bool = false) -> [Int] {
         
         let string = String(value, radix: 2)
         
@@ -170,10 +177,60 @@ class CycleCodeCalculator{
             bits.append(bit)
         }
         
-        while bits.count < n {
-            bits.insert(0, at: 0)
+        if needToSupplement {
+            while bits.count < n {
+                bits.insert(0, at: 0)
+            }
         }
         
         return bits
+    }
+    
+    /*
+     Преобразования массива битов в число
+     */
+    func valueFromBinaryArray(_ binaryArray: [Int]) -> Int {
+        
+        var value = 0
+        
+        for i in 0..<binaryArray.count {
+            if binaryArray[i] == 1 {
+                value += Int(pow(Double(2), Double(binaryArray.count - 1 - i)))
+            }
+        }
+        
+        return value
+    }
+    
+    /*
+     Нахождения остатка от специального XOR деления
+     */
+    func binaryXorModulo(dividend: Polynomial, divider: Polynomial) -> Polynomial {
+        
+        var dividend = binaryArrayFromValue(dividend, needToSupplement: true)
+        let divider = binaryArrayFromValue(divider)
+                
+        var modulo = 0
+        
+        while dividend.count >= divider.count {
+            
+            // c = a // b
+            let a = Array(dividend[0...(divider.count-1)])
+            let b = divider
+            let c = binaryArrayFromValue((valueFromBinaryArray(a) ^ valueFromBinaryArray(b)))
+            
+            // Удаление ненужных битов из делимого
+            for _ in 0..<divider.count {
+                dividend.remove(at: 0)
+            }
+
+            // Создание нового делимого
+            dividend = c + dividend
+            
+            // Сохранение остатка
+            modulo = valueFromBinaryArray(dividend)
+        }
+        
+        return modulo
     }
 }
