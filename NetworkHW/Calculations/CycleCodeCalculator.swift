@@ -48,7 +48,7 @@ typealias Polynomial = Int
      0001000 => остаток = 1000 - вектор синдрома
  */
 
-class CycleCodeCalculator{
+class CycleCodeCalculator {
     
     // Информационный вектор (m(x))
     var infoVector: Polynomial
